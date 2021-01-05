@@ -222,7 +222,7 @@
             ->withStatus(200);
     });
 
-    //detail wisata
+    //data detail wisata
     $app->post('/DrTravelApi/public/detailWisata', function(Request $request,Response $response){
         if(!haveEmptyParameters(array('nama_tempat'),$request,$response)){
             $request_data=$request->getParsedBody();
@@ -287,6 +287,58 @@
             $response_data=array();
             $response_data['error']=false;
             $response_data['kuliner']=$kuliner_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
+    //data penginapan master
+    $app->get('/DrTravelApi/public/allPenginapan',function(Request $request,Response $response){
+        $db=new DbOperations;
+        $penginapan_master=$db->getAllPenginapan();
+        $response_data=array();
+        $response_data['error']=false;
+        $response_data['penginapan']=$penginapan_master;
+
+        $response->getBody()->write(json_encode($response_data));
+
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(200);
+    });
+
+    //data penginapan populer
+    $app->get('/DrTravelApi/public/penginapanPopuler',function(Request $request,Response $response){
+        $db=new DbOperations;
+        $penginapan_master=$db->getPopulerPenginapan();
+        $response_data=array();
+        $response_data['error']=false;
+        $response_data['penginapan']=$penginapan_master;
+
+        $response->getBody()->write(json_encode($response_data));
+
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(200);
+    });
+
+    //data detail penginapan
+    $app->post('/DrTravelApi/public/detailPenginapan', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('nama_penginapan'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_penginapan=$request_data['nama_penginapan'];
+            $db=new DbOperations;
+            $penginapan_master=$db->getDetailPenginapan($nama_penginapan);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['penginapan']=$penginapan_master;
 
             $response->getBody()->write(json_encode($response_data));
 

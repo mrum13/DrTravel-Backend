@@ -92,6 +92,7 @@
             return $wisata_master;
         }
 
+        //data wisata populer
         public function getPopulerWisata(){
             $stmt = $this->con->prepare("SELECT status,nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master Where status = 1;");
             $stmt->execute();
@@ -175,6 +176,57 @@
                 array_push($kuliner_master,$kuliner);
             }
             return $kuliner_master;
+        }
+
+        //semua data penginapan
+        public function getAllPenginapan(){
+            $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master;");
+            $stmt->execute();
+            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $penginapan_master=array();
+            while($stmt->fetch()){
+                $penginapan=array();
+                $penginapan['nama_penginapan']=$nama_penginapan;
+                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
+                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
+                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                array_push($penginapan_master,$penginapan);
+            }
+            return $penginapan_master;
+        }
+
+        //data penginapan populer
+        public function getPopulerPenginapan(){
+            $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master Where status = 1;");
+            $stmt->execute();
+            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $penginapan_master=array();
+            while($stmt->fetch()){
+                $penginapan=array();
+                $penginapan['nama_penginapan']=$nama_penginapan;
+                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
+                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
+                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                array_push($penginapan_master,$penginapan);
+            }
+            return $penginapan;
+        }
+
+        //Detail penginapan
+        public function getDetailPenginapan($nama_penginapan){
+            $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master WHERE nama_penginapan LIKE '%".$nama_penginapan."%'");
+            $stmt->execute();
+            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $penginapan_master=array();
+            while($stmt->fetch()){
+                $penginapan=array();
+                $penginapan['nama_penginapan']=$nama_penginapan;
+                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
+                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
+                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                array_push($penginapan_master,$penginapan);
+            }
+            return $penginapan_master;
         }
 
         public function getUserByEmail($email){
