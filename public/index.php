@@ -351,6 +351,58 @@
             ->withStatus(422);
     });
 
+    //data masjid master
+    $app->get('/DrTravelApi/public/allMasjid',function(Request $request,Response $response){
+        $db=new DbOperations;
+        $masjid_master=$db->getAllMasjid();
+        $response_data=array();
+        $response_data['error']=false;
+        $response_data['masjid']=$masjid_master;
+
+        $response->getBody()->write(json_encode($response_data));
+
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(200);
+    });
+
+    //data masjid populer
+    $app->get('/DrTravelApi/public/masjidPopuler',function(Request $request,Response $response){
+        $db=new DbOperations;
+        $masjid_master=$db->getPopulerMasjid();
+        $response_data=array();
+        $response_data['error']=false;
+        $response_data['masjid']=$masjid_master;
+
+        $response->getBody()->write(json_encode($response_data));
+
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(200);
+    });
+
+    //data detail masjid
+    $app->post('/DrTravelApi/public/detailMasjid', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('nama_masjid'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_penginapan=$request_data['nama_penginapan'];
+            $db=new DbOperations;
+            $penginapan_master=$db->getDetailPenginapan($nama_penginapan);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['penginapan']=$penginapan_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
     //update user
     $app->put('/DrTravelApi/public/updateUser/{id}',function(Request $request,Response $response,array $args){
         $id=$args['id'];

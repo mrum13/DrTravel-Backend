@@ -58,13 +58,12 @@
         }
 
         public function wisataSearch($nama_tempat){
-            $stmt = $this->con->prepare("SELECT status,nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master WHERE nama_tempat LIKE '%".$nama_tempat."%'");
+            $stmt = $this->con->prepare("SELECT nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master WHERE nama_tempat LIKE '%".$nama_tempat."%'");
             $stmt->execute();
-            $stmt->bind_result($status,$nama_tempat,$lokasi_tempat,$deskripsi,$gambar);
+            $stmt->bind_result($nama_tempat,$lokasi_tempat,$deskripsi,$gambar);
             $wisata_master=array();
             while($stmt->fetch()){
                 $wisata=array();
-                $wisata['status']=$status;
                 $wisata['nama_tempat']=$nama_tempat;
                 $wisata['lokasi_tempat']=$lokasi_tempat;
                 $wisata['deskripsi']=$deskripsi;
@@ -76,13 +75,12 @@
 
         //semua data wisata
         public function getAllWisata(){
-            $stmt = $this->con->prepare("SELECT status,nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master;");
+            $stmt = $this->con->prepare("SELECT nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master;");
             $stmt->execute();
-            $stmt->bind_result($status,$nama_tempat,$lokasi_tempat,$deskripsi,$gambar);
+            $stmt->bind_result($nama_tempat,$lokasi_tempat,$deskripsi,$gambar);
             $wisata_master=array();
             while($stmt->fetch()){
                 $wisata=array();
-                $wisata['status']=$status;
                 $wisata['nama_tempat']=$nama_tempat;
                 $wisata['lokasi_tempat']=$lokasi_tempat;
                 $wisata['deskripsi']=$deskripsi;
@@ -131,14 +129,14 @@
         public function getAllKuliner(){
             $stmt = $this->con->prepare("SELECT nama_kuliner,asal_kuliner,deskripsi_kuliner,gambar_kuliner FROM kuliner_master;");
             $stmt->execute();
-            $stmt->bind_result($nama_kuliner,$asal_kuliner,$deskripsi_kuliner,$gambar_kuliner);
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
             $kuliner_master=array();
             while($stmt->fetch()){
                 $kuliner=array();
-                $kuliner['nama_kuliner']=$nama_kuliner;
-                $kuliner['asal_kuliner']=$asal_kuliner;
-                $kuliner['deskripsi_kuliner']=$deskripsi_kuliner;
-                $kuliner['gambar_kuliner']=$gambar_kuliner;
+                $kuliner['tvMenuBawah']=$tvMenuBawah;
+                $kuliner['asalMenuBawah']=$asalMenuBawah;
+                $kuliner['detailMenuBawah']=$detailMenuBawah;
+                $kuliner['gambarMenuBawah']=$gambarMenuBawah;
                 array_push($kuliner_master,$kuliner);
             }
             return $kuliner_master;
@@ -148,14 +146,14 @@
         public function getPopulerKuliner(){
             $stmt = $this->con->prepare("SELECT nama_kuliner,asal_kuliner,deskripsi_kuliner,gambar_kuliner FROM kuliner_master Where status = 1;");
             $stmt->execute();
-            $stmt->bind_result($nama_kuliner,$asal_kuliner,$deskripsi_kuliner,$gambar_kuliner);
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
             $kuliner_master=array();
             while($stmt->fetch()){
                 $kuliner=array();
-                $kuliner['nama_kuliner']=$nama_kuliner;
-                $kuliner['asal_kuliner']=$asal_kuliner;
-                $kuliner['deskripsi_kuliner']=$deskripsi_kuliner;
-                $kuliner['gambar_kuliner']=$gambar_kuliner;
+                $kuliner['tvMenuAtas']=$tvMenuAtas;
+                $kuliner['asalMenuAtas']=$asalMenuAtas;
+                $kuliner['detailMenuAtas']=$detailMenuAtas;
+                $kuliner['gambarMenuAtas']=$gambarMenuAtas;
                 array_push($kuliner_master,$kuliner);
             }
             return $kuliner_master;
@@ -165,14 +163,14 @@
         public function getDetailKuliner($nama_kuliner){
             $stmt = $this->con->prepare("SELECT nama_kuliner,asal_kuliner,deskripsi_kuliner,gambar_kuliner FROM kuliner_master WHERE nama_kuliner LIKE '%".$nama_kuliner."%'");
             $stmt->execute();
-            $stmt->bind_result($nama_kuliner,$asal_kuliner,$deskripsi_kuliner,$gambar_kuliner);
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
             $kuliner_master=array();
             while($stmt->fetch()){
                 $kuliner=array();
-                $kuliner['nama_kuliner']=$nama_kuliner;
-                $kuliner['asal_kuliner']=$asal_kuliner;
-                $kuliner['deskripsi_kuliner']=$deskripsi_kuliner;
-                $kuliner['gambar_kuliner']=$gambar_kuliner;
+                $kuliner['tvMenuAtas']=$tvMenuAtas;
+                $kuliner['asalMenuAtas']=$asalMenuAtas;
+                $kuliner['detailMenuAtas']=$detailMenuAtas;
+                $kuliner['gambarMenuAtas']=$gambarMenuAtas;
                 array_push($kuliner_master,$kuliner);
             }
             return $kuliner_master;
@@ -182,14 +180,14 @@
         public function getAllPenginapan(){
             $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master;");
             $stmt->execute();
-            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
             $penginapan_master=array();
             while($stmt->fetch()){
                 $penginapan=array();
-                $penginapan['nama_penginapan']=$nama_penginapan;
-                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
-                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
-                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                $penginapan['tvMenuBawah']=$tvMenuBawah;
+                $penginapan['asalMenuBawah']=$asalMenuBawah;
+                $penginapan['detailMenuBawah']=$detailMenuBawah;
+                $penginapan['gambarMenuBawah']=$gambarMenuBawah;
                 array_push($penginapan_master,$penginapan);
             }
             return $penginapan_master;
@@ -199,34 +197,85 @@
         public function getPopulerPenginapan(){
             $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master Where status = 1;");
             $stmt->execute();
-            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
             $penginapan_master=array();
             while($stmt->fetch()){
                 $penginapan=array();
-                $penginapan['nama_penginapan']=$nama_penginapan;
-                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
-                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
-                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                $penginapan['tvMenuAtas']=$tvMenuAtas;
+                $penginapan['asalMenuAtas']=$asalMenuAtas;
+                $penginapan['detailMenuAtas']=$detailMenuAtas;
+                $penginapan['gambarMenuAtas']=$gambarMenuAtas;
                 array_push($penginapan_master,$penginapan);
             }
-            return $penginapan;
+            return $penginapan_master;
         }
 
         //Detail penginapan
         public function getDetailPenginapan($nama_penginapan){
             $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master WHERE nama_penginapan LIKE '%".$nama_penginapan."%'");
             $stmt->execute();
-            $stmt->bind_result($nama_penginapan,$lokasi_penginapan,$deskripsi_penginapan,$gambar_penginapan);
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
             $penginapan_master=array();
             while($stmt->fetch()){
                 $penginapan=array();
-                $penginapan['nama_penginapan']=$nama_penginapan;
-                $penginapan['lokasi_penginapan']=$lokasi_penginapan;
-                $penginapan['deskripsi_penginapan']=$deskripsi_penginapan;
-                $penginapan['gambar_penginapan']=$gambar_penginapan;
+                $penginapan['tvMenuAtas']=$tvMenuAtas;
+                $penginapan['asalMenuAtas']=$asalMenuAtas;
+                $penginapan['detailMenuAtas']=$detailMenuAtas;
+                $penginapan['gambarMenuAtas']=$gambarMenuAtas;
                 array_push($penginapan_master,$penginapan);
             }
             return $penginapan_master;
+        }
+
+        //semua data masjid
+        public function getAllMasjid(){
+            $stmt = $this->con->prepare("SELECT nama_masjid,lokasi_masjid,deskripsi_masjid,gambar_masjid FROM masjid_master;");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
+            $masjid_master=array();
+            while($stmt->fetch()){
+                $masjid=array();
+                $masjid['tvMenuBawah']=$tvMenuBawah;
+                $masjid['asalMenuBawah']=$asalMenuBawah;
+                $masjid['detailMenuBawah']=$detailMenuBawah;
+                $masjid['gambarMenuBawah']=$gambarMenuBawah;
+                array_push($masjid_master,$masjid);
+            }
+            return $masjid_master;
+        }
+
+        //data masjid populer
+        public function getPopulerMasjid(){
+            $stmt = $this->con->prepare("SELECT nama_masjid,lokasi_masjid,deskripsi_masjid,gambar_masjid FROM masjid_master Where status = 1;");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
+            $masjid_master=array();
+            while($stmt->fetch()){
+                $masjid=array();
+                $masjid['tvMenuAtas']=$tvMenuAtas;
+                $masjid['asalMenuAtas']=$asalMenuAtas;
+                $masjid['detailMenuAtas']=$detailMenuAtas;
+                $masjid['gambarMenuAtas']=$gambarMenuAtas;
+                array_push($masjid_master,$masjid);
+            }
+            return $masjid_master;
+        }
+
+        //Detail masjid
+        public function getDetailMasjid($nama_masjid){
+            $stmt = $this->con->prepare("SELECT nama_masjid,lokasi_masjid,deskripsi_masjid,gambar_masjid FROM masjid_master WHERE nama_masjid LIKE '%".$nama_masjid."%'");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
+            $masjid_master=array();
+            while($stmt->fetch()){
+                $masjid=array();
+                $masjid['tvMenuAtas']=$tvMenuAtas;
+                $masjid['asalMenuAtas']=$asalMenuAtas;
+                $masjid['detailMenuAtas']=$detailMenuAtas;
+                $masjid['gambarMenuAtas']=$gambarMenuAtas;
+                array_push($masjid_master,$masjid);
+            }
+            return $masjid_master;
         }
 
         public function getUserByEmail($email){
