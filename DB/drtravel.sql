@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2021 at 04:30 AM
+-- Generation Time: Jan 07, 2021 at 11:44 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -95,6 +95,36 @@ INSERT INTO `masjid_master` (`id`, `nama_masjid`, `lokasi_masjid`, `deskripsi_ma
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `penginapan_galleri`
+--
+
+CREATE TABLE `penginapan_galleri` (
+  `id` int(11) NOT NULL,
+  `nama_penginapan` text NOT NULL,
+  `gambar_penginapan` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penginapan_galleri`
+--
+
+INSERT INTO `penginapan_galleri` (`id`, `nama_penginapan`, `gambar_penginapan`) VALUES
+(1, 'Paduppa Resort', 'https://www.simpulrakyat.co.id/wp-content/uploads/2020/07/2.jpg'),
+(2, 'Paduppa Resort', 'https://travelandword.com/wp-content/uploads/2020/07/paduppa-resort-bira-harga-1024x576.jpg'),
+(3, 'Paduppa Resort', 'https://i.ytimg.com/vi/zzGZayv-j1w/hqdefault.jpg'),
+(4, 'Permata indah', 'https://4.bp.blogspot.com/-2jL77r4Y_8E/WSgMjmp6aVI/AAAAAAAAPvA/aqF-uvZdcw8jJ8_TiC_D5WxeAT7_b5ONwCLcB/s1600/Permata%2BIndah%2BResort%2B-%2B9.jpg'),
+(5, 'Permata indah', 'https://2.bp.blogspot.com/-OIlXrNl9uLI/WSgI0_hepII/AAAAAAAAPus/hWqoSFp4UagXiZ-Gaphl536enPn60DrzQCEw/s1600/Permata%2BIndah%2BResort%2B-%2B2.jpg'),
+(6, 'Permata indah', 'https://4.bp.blogspot.com/-Pm322Ah1u_c/WSgMlJHxHPI/AAAAAAAAPvE/kZg4gbnC1bo0F71a8wm07Dh0Vwvhjwt_ACLcB/s1600/Permata_7.jpg'),
+(7, 'Pondok Lembah Biru', 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/t_htl-dskt/tix-hotel/images-web/2020/10/31/68cc620a-049f-409e-8299-a521cabe9bd1-1604151036201-d52bdc377e08c72eb3d5198b35af4937.jpg'),
+(8, 'Pondok Lembah Biru', 'https://jejakpiknik.com/wp-content/uploads/2018/11/Villa-Masagena-630x380.jpg'),
+(9, 'Pondok Lembah Biru', 'https://khalifah-wisata.com/wp-content/uploads/2020/03/lembah-biru-malino3.jpg'),
+(10, 'Hotel Pantai Gapura', 'https://pix10.agoda.net/hotelImages/494/4948192/4948192_18050407130065218299.jpg'),
+(11, 'Hotel Pantai Gapura', 'https://media-cdn.tripadvisor.com/media/photo-s/05/30/10/bb/hotel-pantai-gapura-makassar.jpg'),
+(12, 'Hotel Pantai Gapura', 'https://media-cdn.tripadvisor.com/media/photo-s/01/f4/e3/08/sea-view-cottage-ext.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `penginapan_master`
 --
 
@@ -130,17 +160,6 @@ CREATE TABLE `user_account` (
   `name` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `user_account`
---
-
-INSERT INTO `user_account` (`id`, `email`, `password`, `name`) VALUES
-(1, 'admin1@gmail.com', '$2y$10$I7UPeCk4lDCAE.6KKIVW0uH8Cyu/0a5iKtmf7OtIB.ucC5XJfzAxu', 'admin1'),
-(2, 'admin5@gmail.com', '$2y$10$HvrXJZJ.L9mKlkItibLbxurkng.wUnD2w.xf3wxYb0px68xW.DqXG', 'admin5'),
-(3, 'adminrum@gmail.com', '$2y$10$pZyZMpO2ndmZjzsbrTp4Lux4pnlMgJjF1.I48DvooJFX4qnGrmSsy', 'Rum ji'),
-(4, 'adminrum13@gmail.com', '$2y$10$1Ld7S18E1PGYCXVaXSJ4uucIGlTaoLWsNNf38qf7yzY4eVLF3fhOy', 'adminrummm'),
-(5, 'adminbaru@gmail.com', '$2y$10$zaNKekDT60eMmfutQmAWVOC9rTH2RjRffqzzkZFqFh8kE.SE7mVZm', 'admin saja');
-
 -- --------------------------------------------------------
 
 --
@@ -152,6 +171,15 @@ CREATE TABLE `wisata_galleri` (
   `nama_wisata` text NOT NULL,
   `gambar_wisata` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `wisata_galleri`
+--
+
+INSERT INTO `wisata_galleri` (`id`, `nama_wisata`, `gambar_wisata`) VALUES
+(1, 'Pantai Losari', 'https://cdn-2.tstatic.net/kaltim/foto/bank/images/instagramkhaidirr_-liburan-ke-pantai-losari.jpg'),
+(2, 'Pantai Losari', 'https://www.itrip.id/wp-content/uploads/2020/11/Pantai-Losari-Makassar.jpg'),
+(3, 'Pantai Losari', 'https://portalwisata.co.id/wp-content/uploads/2016/11/Pantai-losari-via-gohitzz-696x464.jpg');
 
 -- --------------------------------------------------------
 
@@ -175,7 +203,8 @@ CREATE TABLE `wisata_master` (
 INSERT INTO `wisata_master` (`id`, `nama_tempat`, `lokasi_tempat`, `deskripsi`, `status`, `gambar`) VALUES
 (3, 'Pantai Losari', 'Makassar, Sulawesi Selatan', 'Banyak pisang epe', 1, 'https://www.pantaipedia.com/wp-content/uploads/2019/02/Pantai-Losari.jpg'),
 (4, 'Benteng Rotterdam', 'Makassar, Sulawesi Selatan', 'Fort Rotterdam atau Benteng Ujung Pandang (Jum Pandang) adalah sebuah benteng peninggalan Kerajaan Gowa-Tallo. Letak benteng ini berada di pinggir pantai sebelah barat Kota Makassar, Sulawesi Selatan.\r\n\r\nBenteng ini dibangun pada tahun 1545 oleh Raja Gowa ke-9 yang bernama I manrigau Daeng Bonto Karaeng Lakiung . Awalnya benteng ini berbahan dasar tanah liat, namun pada masa pemerintahan Raja Gowa ke-14 Sultan Alauddin konstruksi benteng ini diganti menjadi batu padas yang bersumber dari Pegunungan Karst yang ada di daerah Maros. Benteng Ujung Pandang ini berbentuk seperti seekor penyu yang hendak merangkak turun ke lautan. Dari segi bentuknya sangat jelas filosofi Kerajaan Gowa, bahwa penyu dapat hidup di darat maupun di laut. Begitu pun dengan Kerajaan Gowa yang berjaya di daratan maupun di lautan.\r\nNama asli benteng ini adalah Benteng Ujung Pandang, biasa juga orang Gowa-Makassar menyebut benteng ini dengan sebutan Benteng Panyyua yang merupakan markas pasukan katak Kerajaan Gowa. \r\n\r\nKerajaan Gowa-Tallo akhirnya menandatangani perjanjian Bungayya yang salah satu pasalnya mewajibkan Kerajaan Gowa untuk menyerahkan benteng ini kepada Belanda. Pada saat Belanda menempati benteng ini, nama Benteng Ujung Pandang diubah menjadi Fort Rotterdam. Cornelis Speelman sengaja memilih nama Fort Rotterdam untuk mengenang daerah kelahirannya di Belanda. Benteng ini kemudian digunakan oleh Belanda sebagai pusat penampungan rempah-rempah di Indonesia bagian timur.', 0, 'https://makassar.singgasanahotels.com/img?src=1f5c6fde2b70ef6fbadeeb3faf94cdf5.jpg&width=920&height=530&crop-to-fit'),
-(5, 'Pantai Bira', 'Bulukumba, Sulawesi Selatan', 'pantai tanjung bira ini bisa di bilang merupakan pintu masuk menuju Pulau Kambing. Karena jika Anda akan berkunjung ke Pulau Kambing, Anda harus menyewa perahu dari Pantai Tanjung Bira.', 1, 'https://www.pantaipedia.com/wp-content/uploads/2018/12/Pantai-Tanjung-Bira.jpg');
+(5, 'Pantai Bira', 'Bulukumba, Sulawesi Selatan', 'pantai tanjung bira ini bisa di bilang merupakan pintu masuk menuju Pulau Kambing. Karena jika Anda akan berkunjung ke Pulau Kambing, Anda harus menyewa perahu dari Pantai Tanjung Bira.', 1, 'https://www.pantaipedia.com/wp-content/uploads/2018/12/Pantai-Tanjung-Bira.jpg'),
+(6, 'Pantai Akkarena', 'Makassar, Sulawesi Selatan', 'Banyak Uwu-uwu', 0, 'https://travelspromo.com/wp-content/uploads/2020/07/Dermaga-cinta-pantai-akkarena-makassar.jpg');
 
 --
 -- Indexes for dumped tables
@@ -197,6 +226,12 @@ ALTER TABLE `lupasandi_master`
 -- Indexes for table `masjid_master`
 --
 ALTER TABLE `masjid_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penginapan_galleri`
+--
+ALTER TABLE `penginapan_galleri`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -246,6 +281,12 @@ ALTER TABLE `masjid_master`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `penginapan_galleri`
+--
+ALTER TABLE `penginapan_galleri`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `penginapan_master`
 --
 ALTER TABLE `penginapan_master`
@@ -255,19 +296,19 @@ ALTER TABLE `penginapan_master`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `wisata_galleri`
 --
 ALTER TABLE `wisata_galleri`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `wisata_master`
 --
 ALTER TABLE `wisata_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

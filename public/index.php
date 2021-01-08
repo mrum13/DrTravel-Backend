@@ -247,6 +247,31 @@
             ->withStatus(422);
     });
 
+    //data galleri wisata
+    $app->post('/DrTravelApi/public/galleriWisata', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('nama_tempat'),$request,$response)){
+            $request_data=$request->getParsedBody();
+
+            $nama_tempat=$request_data['nama_tempat'];
+
+            $db=new DbOperations;
+
+            $galleri_master=$db->wisataGalleri($nama_tempat);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['galleri']=$galleri_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
     //data kuliner master
     $app->get('/DrTravelApi/public/allKuliner',function(Request $request,Response $response){
         $db=new DbOperations;
@@ -277,13 +302,35 @@
             ->withStatus(200);
     });
 
-    //data detail kuliner
-    $app->post('/DrTravelApi/public/detailKuliner', function(Request $request,Response $response){
-        if(!haveEmptyParameters(array('nama_kuliner'),$request,$response)){
+    //data detail kuliner all
+    $app->post('/DrTravelApi/public/detailKulinerAll', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuBawah'),$request,$response)){
             $request_data=$request->getParsedBody();
-            $nama_kuliner=$request_data['nama_kuliner'];
+            $nama_kuliner=$request_data['tvMenuBawah'];
             $db=new DbOperations;
-            $kuliner_master=$db->getDetailKuliner($nama_kuliner);
+            $kuliner_master=$db->getDetailKulinerAll($nama_kuliner);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['kuliner']=$kuliner_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
+    //data detail kuliner favorit
+    $app->post('/DrTravelApi/public/detailKulinerFav', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuAtas'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_kuliner=$request_data['tvMenuAtas'];
+            $db=new DbOperations;
+            $kuliner_master=$db->getDetailKulinerFav($nama_kuliner);
             $response_data=array();
             $response_data['error']=false;
             $response_data['kuliner']=$kuliner_master;
@@ -329,16 +376,62 @@
             ->withStatus(200);
     });
 
-    //data detail penginapan
-    $app->post('/DrTravelApi/public/detailPenginapan', function(Request $request,Response $response){
-        if(!haveEmptyParameters(array('nama_penginapan'),$request,$response)){
+    //data detail penginapan all
+    $app->post('/DrTravelApi/public/detailPenginapanAll', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuBawah'),$request,$response)){
             $request_data=$request->getParsedBody();
-            $nama_penginapan=$request_data['nama_penginapan'];
+            $nama_penginapan=$request_data['tvMenuBawah'];
             $db=new DbOperations;
-            $penginapan_master=$db->getDetailPenginapan($nama_penginapan);
+            $penginapan_master=$db->getDetailPenginapanAll($nama_penginapan);
             $response_data=array();
             $response_data['error']=false;
             $response_data['penginapan']=$penginapan_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
+    //data detail penginapan Fav
+    $app->post('/DrTravelApi/public/detailPenginapanFav', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuAtas'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_penginapan=$request_data['tvMenuAtas'];
+            $db=new DbOperations;
+            $penginapan_master=$db->getDetailPenginapanFav($nama_penginapan);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['penginapan']=$penginapan_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
+    //data galleri penginapan
+    $app->post('/DrTravelApi/public/galleriPenginapan', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('nama_tempat'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_tempat=$request_data['nama_tempat'];
+
+            $db=new DbOperations;
+
+            $penginapan_master=$db->penginapanGalleri($nama_tempat);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['galleri']=$penginapan_master;
 
             $response->getBody()->write(json_encode($response_data));
 
@@ -381,16 +474,38 @@
             ->withStatus(200);
     });
 
-    //data detail masjid
-    $app->post('/DrTravelApi/public/detailMasjid', function(Request $request,Response $response){
-        if(!haveEmptyParameters(array('nama_masjid'),$request,$response)){
+    //data detail masjid all
+    $app->post('/DrTravelApi/public/detailMasjidAll', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuBawah'),$request,$response)){
             $request_data=$request->getParsedBody();
-            $nama_penginapan=$request_data['nama_penginapan'];
+            $nama_masjid=$request_data['tvMenuBawah'];
             $db=new DbOperations;
-            $penginapan_master=$db->getDetailPenginapan($nama_penginapan);
+            $masjid_master=$db->getDetailMasjidAll($nama_masjid);
             $response_data=array();
             $response_data['error']=false;
-            $response_data['penginapan']=$penginapan_master;
+            $response_data['masjid']=$masjid_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
+    //data detail masjid fav
+    $app->post('/DrTravelApi/public/detailMasjidFav', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('tvMenuAtas'),$request,$response)){
+            $request_data=$request->getParsedBody();
+            $nama_masjid=$request_data['tvMenuAtas'];
+            $db=new DbOperations;
+            $masjid_master=$db->getDetailMasjidFav($nama_masjid);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['masjid']=$masjid_master;
 
             $response->getBody()->write(json_encode($response_data));
 

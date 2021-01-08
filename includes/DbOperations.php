@@ -57,6 +57,7 @@
             return $password;
         }
 
+        //pencarian wisata
         public function wisataSearch($nama_tempat){
             $stmt = $this->con->prepare("SELECT nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master WHERE nama_tempat LIKE '%".$nama_tempat."%'");
             $stmt->execute();
@@ -159,8 +160,25 @@
             return $kuliner_master;
         }
 
-        //Detail kuliner
-        public function getDetailKuliner($nama_kuliner){
+        //Detail kuliner all
+        public function getDetailKulinerAll($nama_kuliner){
+            $stmt = $this->con->prepare("SELECT nama_kuliner,asal_kuliner,deskripsi_kuliner,gambar_kuliner FROM kuliner_master WHERE nama_kuliner LIKE '%".$nama_kuliner."%'");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
+            $kuliner_master=array();
+            while($stmt->fetch()){
+                $kuliner=array();
+                $kuliner['tvMenuBawah']=$tvMenuBawah;
+                $kuliner['asalMenuBawah']=$asalMenuBawah;
+                $kuliner['detailMenuBawah']=$detailMenuBawah;
+                $kuliner['gambarMenuBawah']=$gambarMenuBawah;
+                array_push($kuliner_master,$kuliner);
+            }
+            return $kuliner_master;
+        }
+
+        //Detail kuliner favorit
+        public function getDetailKulinerFav($nama_kuliner){
             $stmt = $this->con->prepare("SELECT nama_kuliner,asal_kuliner,deskripsi_kuliner,gambar_kuliner FROM kuliner_master WHERE nama_kuliner LIKE '%".$nama_kuliner."%'");
             $stmt->execute();
             $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
@@ -210,8 +228,25 @@
             return $penginapan_master;
         }
 
-        //Detail penginapan
-        public function getDetailPenginapan($nama_penginapan){
+        //Detail penginapan All
+        public function getDetailPenginapanAll($nama_penginapan){
+            $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master WHERE nama_penginapan LIKE '%".$nama_penginapan."%'");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
+            $penginapan_master=array();
+            while($stmt->fetch()){
+                $penginapan=array();
+                $penginapan['tvMenuBawah']=$tvMenuBawah;
+                $penginapan['asalMenuBawah']=$asalMenuBawah;
+                $penginapan['detailMenuBawah']=$detailMenuBawah;
+                $penginapan['gambarMenuBawah']=$gambarMenuBawah;
+                array_push($penginapan_master,$penginapan);
+            }
+            return $penginapan_master;
+        }
+
+        //Detail penginapan Fav
+        public function getDetailPenginapanFav($nama_penginapan){
             $stmt = $this->con->prepare("SELECT nama_penginapan,lokasi_penginapan,deskripsi_penginapan,gambar_penginapan FROM penginapan_master WHERE nama_penginapan LIKE '%".$nama_penginapan."%'");
             $stmt->execute();
             $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
@@ -225,6 +260,36 @@
                 array_push($penginapan_master,$penginapan);
             }
             return $penginapan_master;
+        }
+
+        //galleri Penginapan
+        public function penginapanGalleri($nama_tempat){
+            $stmt = $this->con->prepare("SELECT nama_penginapan,gambar_penginapan FROM penginapan_galleri WHERE nama_penginapan LIKE '%".$nama_tempat."%'");
+            $stmt->execute();
+            $stmt->bind_result($nama_tempat,$gambar);
+            $penginapan_master=array();
+            while($stmt->fetch()){
+                $penginapan=array();
+                $penginapan['nama_tempat']=$nama_tempat;
+                $penginapan['gambar']=$gambar;
+                array_push($penginapan_master,$penginapan);
+            }
+            return $penginapan_master;
+        }
+
+        //galleri Wisata
+        public function wisataGalleri($nama_tempat){
+            $stmt = $this->con->prepare("SELECT nama_wisata,gambar_wisata FROM wisata_galleri WHERE nama_wisata LIKE '%".$nama_tempat."%'");
+            $stmt->execute();
+            $stmt->bind_result($nama_tempat,$gambar);
+            $galleri_master=array();
+            while($stmt->fetch()){
+                $galleri=array();
+                $galleri['nama_tempat']=$nama_tempat;
+                $galleri['gambar']=$gambar;
+                array_push($galleri_master,$galleri);
+            }
+            return $galleri_master;
         }
 
         //semua data masjid
@@ -261,8 +326,25 @@
             return $masjid_master;
         }
 
-        //Detail masjid
-        public function getDetailMasjid($nama_masjid){
+        //Detail masjid All
+        public function getDetailMasjidAll($nama_masjid){
+            $stmt = $this->con->prepare("SELECT nama_masjid,lokasi_masjid,deskripsi_masjid,gambar_masjid FROM masjid_master WHERE nama_masjid LIKE '%".$nama_masjid."%'");
+            $stmt->execute();
+            $stmt->bind_result($tvMenuBawah,$asalMenuBawah,$detailMenuBawah,$gambarMenuBawah);
+            $masjid_master=array();
+            while($stmt->fetch()){
+                $masjid=array();
+                $masjid['tvMenuBawah']=$tvMenuBawah;
+                $masjid['asalMenuBawah']=$asalMenuBawah;
+                $masjid['detailMenuBawah']=$detailMenuBawah;
+                $masjid['gambarMenuBawah']=$gambarMenuBawah;
+                array_push($masjid_master,$masjid);
+            }
+            return $masjid_master;
+        }
+
+        //Detail masjid Fav
+        public function getDetailMasjidFav($nama_masjid){
             $stmt = $this->con->prepare("SELECT nama_masjid,lokasi_masjid,deskripsi_masjid,gambar_masjid FROM masjid_master WHERE nama_masjid LIKE '%".$nama_masjid."%'");
             $stmt->execute();
             $stmt->bind_result($tvMenuAtas,$asalMenuAtas,$detailMenuAtas,$gambarMenuAtas);
