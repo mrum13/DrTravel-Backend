@@ -91,6 +91,21 @@
             return $wisata_master;
         }
 
+        // //semua data wisata
+        // public function getAllWisata(){
+        //     $stmt = $this->con->prepare("SELECT nama_tempat,gambar FROM wisata_master;");
+        //     $stmt->execute();
+        //     $stmt->bind_result($nama_tempat,$gambar);
+        //     $wisata_master=array();
+        //     while($stmt->fetch()){
+        //         $wisata=array();
+        //         $wisata['nama_tempat']=$nama_tempat;
+        //         $wisata['gambar']=$gambar;
+        //         array_push($wisata_master,$wisata);
+        //     }
+        //     return $wisata_master;
+        // }
+
         //data wisata populer
         public function getPopulerWisata(){
             $stmt = $this->con->prepare("SELECT status,nama_tempat,lokasi_tempat,deskripsi,gambar FROM wisata_master Where status = 1;");
@@ -121,6 +136,20 @@
                 $wisata['lokasi_tempat']=$lokasi_tempat;
                 $wisata['deskripsi']=$deskripsi;
                 $wisata['gambar']=$gambar;
+                array_push($wisata_master,$wisata);
+            }
+            return $wisata_master;
+        }
+
+        //Street View
+        public function getStreetView($nama_tempat){
+            $stmt = $this->con->prepare("SELECT kordinat FROM wisata_master WHERE nama_tempat LIKE '%".$nama_tempat."%'");
+            $stmt->execute();
+            $stmt->bind_result($kordinat);
+            $wisata_master=array();
+            while($stmt->fetch()){
+                $wisata=array();
+                $wisata['kordinat']=$kordinat;
                 array_push($wisata_master,$wisata);
             }
             return $wisata_master;

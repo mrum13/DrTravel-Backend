@@ -247,6 +247,31 @@
             ->withStatus(422);
     });
 
+    //Street View (VR)
+    $app->post('/DrTravelApi/public/streetView', function(Request $request,Response $response){
+        if(!haveEmptyParameters(array('nama_tempat'),$request,$response)){
+            $request_data=$request->getParsedBody();
+
+            $nama_tempat=$request_data['nama_tempat'];
+
+            $db=new DbOperations;
+
+            $wisata_master=$db->getStreetView($nama_tempat);
+            $response_data=array();
+            $response_data['error']=false;
+            $response_data['wisata']=$wisata_master;
+
+            $response->getBody()->write(json_encode($response_data));
+
+            return $response
+                ->withHeader('Content-type','application/json')
+                ->withStatus(200);
+        }
+        return $response
+            ->withHeader('Content-type','application/json')
+            ->withStatus(422);
+    });
+
     //data galleri wisata
     $app->post('/DrTravelApi/public/galleriWisata', function(Request $request,Response $response){
         if(!haveEmptyParameters(array('nama_tempat'),$request,$response)){
